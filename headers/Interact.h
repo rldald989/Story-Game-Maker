@@ -35,6 +35,11 @@ public:
         }
     }
 
+    void PrintBlankResponse(Character _char)
+    {
+        std::cout << _char.name << ": " << "..." << std::endl;
+    }
+
     void GetResponse(Character _char, int responseSetIndex, Character _other)
     {
         // Reads the input into a temporary string
@@ -47,8 +52,15 @@ public:
             // Checks to make sure that the user has put in one of the avaliable response options
             if(tempInput == std::to_string(i + 1))
             {
-                // Prints the Npc/other character's response
-                PrintResponse(_other, responseSetIndex, i);
+                if(std::atoi(tempInput.c_str()) > _char.responses[responseSetIndex].GetResponses().size()-1)
+                {
+                    PrintBlankResponse(_other);
+                }
+                else
+                {
+                    // Prints the Npc/other character's response
+                    PrintResponse(_other, responseSetIndex, i);
+                }
             }
         }
     }
